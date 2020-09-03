@@ -5,6 +5,7 @@
   "author": "",
   "scripts": {
     "build": "parcel build ./public/index.html",
+    "test": "jest ./tests",
     "test:unit": "vue-cli-service test:unit",
     "start": "parcel ./public/index.html"
   },
