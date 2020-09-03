@@ -2,25 +2,13 @@
   "name": "eth-crowdfund",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/index.js",
-  "scripts": {
-    "start": "parcel ./public/index.html",
-    "build": "parcel build ./public/index.html",
-    "test:unit": "jest ./test/unit --watchAll"
-  },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@testing-library/vue": "^5.0.4",
-    "@vue/component-compiler-utils": "^3.2.0",
-    "@vue/test-utils": "^1.0.5",
-    "jest": "^26.4.2",
-    "parcel-bundler": "^1.12.4",
-    "sass": "^1.26.10",
-    "vue-jest": "^3.0.6",
-    "vue-template-compiler": "^2.6.12"
+  "scripts": {
+    "build": "parcel build ./public/index.html",
+    "test:unit": "vue-cli-service test:unit",
+    "start": "parcel ./public/index.html"
   },
+  "main": "./src/index.js",
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.0.43",
     "ajv": "^6.12.4",
@@ -32,5 +20,19 @@
     "vue-router": "^3.4.3",
     "vuex": "^3.5.1",
     "web3": "^1.2.11"
-  }
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-service": "^4.5.4",
+    "@vue/component-compiler-utils": "^3.2.0",
+    "@vue/test-utils": "^1.0.5",
+    "jest": "^26.4.2",
+    "jest-transform-stub": "^2.0.0",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.10",
+    "vue-jest": "^3.0.6",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "keywords": [],
+  "license": "ISC"
 }
