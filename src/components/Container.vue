@@ -1,5 +1,4 @@
 <template>
-  <Loading v-if="this.$store.state.loading" />
   <div v-if="!this.$store.state.loading">
     <div class="about">
     </div>
@@ -11,9 +10,15 @@
       </div>
     </div>
     <section class="campaign-container">
-      <div v-for="campaign in campaigns.slice(startIndex, startIndex + 4)" v-bind:key="campaign.id">
+      <router-link
+        class="campaign-card"
+        :to="{ name: 'Single Campaign',
+        params: {address: campaign.address}}"
+        v-for="campaign in campaigns.slice(startIndex, startIndex + 4)"
+        v-bind:key="campaign.id"
+      >
         <CampaignCard v-bind:campaign="campaign" />
-      </div>
+      </router-link>
     </section>
   </div>
 </template>
@@ -21,7 +26,7 @@
 <script>
 
 import CampaignCard from '@/components/CampaignCard.vue';
-import Loading from '@/components/Loading.vue';
+/* import Loading from '@/components/Loading.vue'; */
 
 export default {
   name: 'Container',
@@ -46,15 +51,15 @@ export default {
     }
   },
   components: {
-    CampaignCard,
-    Loading
+    CampaignCard
+    /* Loading */
   }
 }
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
 
   .container-header {
     display: flex;
@@ -85,11 +90,11 @@ export default {
     margin-bottom: .5rem;
   }
 
-  .campaign-container {
-    margin: 2rem 0rem 4rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: .5rem;
+.campaign-container {
+    background-color: black;
+    max-width: 105rem;
+    height: 63vh;
+    margin: 0 auto;
   }
 
 </style>

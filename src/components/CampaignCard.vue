@@ -1,26 +1,19 @@
 <template>
-  <router-link
-    style="text-decoration: none;"
-    :to="{ name: 'Single Campaign',
-    params: {address: campaign.address}}">
-    <div>
-      <section class="campaign-card">
-        <section>
-        <div v-if="campaign.image" class="img-div"><img :src=campaign.image /></div>
-        <article v-if="!campaign.image" class="no-img">
-          <h4>
-            No <br /> Image <br /> available
-          </h4>
-        </article>
-        <div class="campaign-info">
-          <h1> {{campaign.name}}</h1>
-          <p>{{campaign.description.split('.')[0]}}...</p>
-        </div>
-        </section>
-        <div class="goal"><b>${{(campaign.value* exchangeRate).toFixed(2)}}</b> raised</div>
-      </section>
+  <section class="campaign-card__content">
+    <div v-if="campaign.image" class="img-div">
+      <img :src=campaign.image />
     </div>
-  </router-link>
+    <article v-if="!campaign.image" class="no-img">
+      <h4>
+        No <br /> Image <br /> available
+      </h4>
+    </article>
+    <div class="campaign-card__info">
+      <h1> {{campaign.name}}</h1>
+      <p>{{campaign.description.split('.')[0]}}...</p>
+    </div>
+    <div class="goal"><b>${{(campaign.value* exchangeRate).toFixed(2)}}</b> raised</div>
+  </section>
 </template>
 
 <script>
@@ -41,37 +34,49 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 @import "../_variables.scss";
 
-h1 {
-  margin: 1rem 0 0 0;
-}
+/* [class^="campaign-card"] { */
+/*   float: left; */
 
-img {
-  width: 100%;
-  height: 100%;
-}
+/*   &:not(:last-child) { */
+/*     margin-right: 11rem; */
+/*   } */
+/* } */
 
 .campaign-card {
   background: whitesmoke;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
   align-items: center;
   text-decoration: none;
-  box-shadow: 1px 1px 3px grey;
+  box-shadow: 0 5px 10px rgba(black, .2);
   height: 60vh;
-  width: 20vw;
-  box-sizing: border-box;
-  transform: scale(1);
+  width: calc(100% - 3 * $grid-gap);
   color: black;
+  float: left;
+
+  &:not(:last-child) {
+    margin-right: $grid-gap;
+  }
+
   &:hover {
-    transform: scale(1.02);
-    box-shadow: 2px 2px 10px black;
+    transform: scale(1.02) translateY(-3px);
+    box-shadow: 0 8px 15px rgba(black, .4);
     transition: all 0.25s;
     text-decoration: underline;
     outline: 1px solid black;
+  }
+
+  &__content {
+    height: 52rem;
+    transition: all 1s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 }
 
@@ -84,5 +89,4 @@ img {
 .no-img {
   @include pixelate(.1rem, $dark_gray, $gray);
 }
-
 </style>

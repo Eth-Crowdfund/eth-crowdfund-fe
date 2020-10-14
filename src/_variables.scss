@@ -19,6 +19,10 @@ $green: #689d6a;
 $light-green: #8ec07c;
 $light-blue: #83a598;
 
+// LAYOUT
+
+$grid-gap: 3rem;
+
 // Mixins
 @mixin pixelate($size, $base, $accent: rgba(0,0,0,.25)) {
   background: $base;

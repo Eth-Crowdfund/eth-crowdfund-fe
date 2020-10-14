@@ -1,5 +1,4 @@
 <template>
-  <div id="app">
     <div id="nav">
       <div class= "logo-section">
         <router-link to='/'>
@@ -14,7 +13,6 @@
       </div>
     </div>
     <router-view/>
-  </div>
 </template>
 
 <script>
@@ -25,6 +23,20 @@ export default {
 
 <style lang="scss">
 @import "variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}
 
 .links-section {
   align-self: center;
