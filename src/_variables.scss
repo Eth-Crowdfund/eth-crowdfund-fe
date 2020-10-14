@@ -73,3 +73,11 @@ $border_color_1, $border_color_2, $border_color_3, $border_color_4, $expression:
   }
 }
 
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+

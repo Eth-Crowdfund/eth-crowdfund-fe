@@ -9,17 +9,11 @@
         <button :disabled="startIndex + 4 >= campaigns.length" @click="nextPage">⇨</button>
       </div>
     </div>
-    <section class="campaign-container">
-      <router-link
-        class="campaign-card"
-        :to="{ name: 'Single Campaign',
-        params: {address: campaign.address}}"
-        v-for="campaign in campaigns.slice(startIndex, startIndex + 4)"
-        v-bind:key="campaign.id"
-      >
-        <CampaignCard v-bind:campaign="campaign" />
-      </router-link>
-    </section>
+    <CampaignCard
+      v-bind:campaigns="campaigns"
+      v-bind:startIndex="startIndex"
+      v-bind:endIndex="endIndex"
+      />
   </div>
 </template>
 
@@ -60,6 +54,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import "../_variables.scss";
 
   .container-header {
     display: flex;
@@ -90,11 +85,35 @@ export default {
     margin-bottom: .5rem;
   }
 
-.campaign-container {
-    background-color: black;
-    max-width: 105rem;
-    height: 63vh;
-    margin: 0 auto;
-  }
-
 </style>
+      <!--
+      <router-link
+        class="campaign-row"
+        :to="{ name: 'Single Campaign',
+        params: {address: campaign.address}}"
+        v-for="campaign in campaigns.slice(startIndex, startIndex + 4)"
+        v-bind:key="campaign.id"
+      >
+
+      </router-link>
+
+.campaign-container {
+  max-width: 105rem;
+  height: 63vh;
+  margin: 1.3rem auto 0 auto;
+
+  .campaign-row {
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 5px 10px rgba(black, .2);
+    color: black;
+    width: calc((100% - 3 * #{$grid-gap}) / 4);
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: $grid-gap;
+    }
+  }
+}
+
+      -->
