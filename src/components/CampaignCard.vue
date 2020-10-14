@@ -3,10 +3,10 @@
     <div class="campaign"
       v-for="campaign in campaigns.slice(startIndex, startIndex + 4)"
       v-bind:key="campaign.id"
-    >
-      <div class="content">
-        <article class="content__side content__side--front">
-        <div v-if="campaign.image" class="campaign-content__front--img">
+      >
+      <article class="content" :id=campaign.id>
+        <div class="content__side content__side--front">
+        <div v-if="campaign.image" class="content__img">
           <img :src=campaign.image />
           <article v-if="!campaign.image" class="no-img">
             <h4>
@@ -14,17 +14,18 @@
             </h4>
           </article>
         </div>
-        <div class="campaign-card__info">
+        <div class="content__info">
           <h1> {{campaign.name}}</h1>
           <p>{{campaign.description.split('.')[0]}}...</p>
         </div>
-        <div class="goal"><b>${{(campaign.value* exchangeRate).toFixed(2)}}</b> raised</div>
-        </article>
-        <article class="campaign-card__content--back">
+        </div>
+        <div class="content__side content__side--back">
           <h1> {{campaign.name}}</h1>
-          <p>{{campaign.description.split('.')[0]}}...</p>
-        </article>
-      </div>
+          <p>{{campaign.description}}</p>
+          <div class="goal"><b>${{(campaign.value* exchangeRate).toFixed(2)}}</b>
+          raised</div>
+        </div>
+      </article>
     </div>
   </section>
 </template>
@@ -49,18 +50,17 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "../_variables.scss";
+/* ROW LAYOUT */
 
 .campaigns {
   max-width: 105rem;
-  height: 63vh;
   margin: 1.3rem auto 0 auto;
 
   @include clearfix;
 
   .campaign {
-    box-shadow: 0 5px 10px rgba(black, .2);
-    color: black;
     width: calc((100% - 3 * #{$grid-gap}) / 4);
+    background: transparent;
     float: left;
 
     &:not(:last-child) {
@@ -69,51 +69,71 @@ export default {
   }
 }
 
-.campaign-content {
+/* TRANSFORM FUNC */
+
+.content {
+  font-size: 1.6rem;
+  text-align: center;
   position: relative;
+  height: 40rem;
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+    box-shadow: 0 1.5rem 4rem rgba(black, .25);
 
-  &__front {
-    background: orangered;
-    height: 60vh;
-    position: relative;
-
-    &--img {
-        padding: 0;
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%;
-
-        & img {
-         background-size: cover;
-         height: 30vh;
-         width: 100%;
-       }
-    }
-
-  }
-
-  &__back {
-    background: black;
+  &__side {
+    height: 40rem;
+    width: 100%;
+    transition: all .8s ease;
     position: absolute;
     top: 0; left: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 3px;
+    overflow: hidden;
+
+    &--front {
+      background-color: whitesmoke;
+    }
+
+    &--back {
+      transform: rotateY(180deg);
+      background-image: linear-gradient(to right bottom, $light-green, $green);
+    }
   }
 
-  &:hover {
-      transform: scale(1.02) translateY(-3px);
-      box-shadow: 0 8px 15px rgba(black, .4);
-      transition: all 0.25s;
-      text-decoration: underline;
-      outline: 1px solid black;
+  &:hover &__side--front {
+    transform: rotateY(-180deg);
+  }
+
+  &:hover &__side--back {
+    transform: rotateY(0);
+  }
+
+/* FRONT */
+
+  &__img {
+    @include aspect-ratio(2.3, 3);
+    /* background-size: cover; */
+
+    img {
+      height: 40vh;
+      width: 100%;
     }
-}
+  }
 
-.img-div,
-.no-img {
-  height: 30vh;
-  width: 20vw;
-}
+  &__info {
+    position: absolute;
+    bottom: 1.6rem;
 
-.no-img {
-  @include pixelate(.1rem, $dark_gray, $gray);
+    h1 {
+      margin: 1rem;
+    }
+
+    .goal {
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
+
 }
 </style>
